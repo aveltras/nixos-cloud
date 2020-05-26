@@ -19,12 +19,22 @@
   time.timeZone = "Europe/Paris";
 
   environment.systemPackages = with pkgs; [
-    
+    inetutils
+    sysstat
   ];
 
   services.openssh = {
     enable = true;
     permitRootLogin = "yes";
+  };
+
+  users.users.aveltras = {
+    isNormalUser = true;
+    home = "/home/aveltras";
+    extraGroups = [ "wheel" "networkmanager" ];
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICRH41b8Qn+80OJuZssDDfqcSkH3MkVyqoA4I8V2FkW7 aveltras"
+    ];
   };
 }
 
